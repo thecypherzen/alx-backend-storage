@@ -12,29 +12,13 @@ DELIMITER $$
 
 CREATE PROCEDURE ComputeAverageScoreForUser(IN userId INT)
 BEGIN
-    DECLARE totalScores, projectCount, subTotal INT DEFAULT 0;
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE c_cursor CURSOR FOR
-        -- get sum of scores by project for user
-        SELECT SUM(score)
-        FROM holberton.corrections
-        WHERE user_id = userId
-        GROUP BY project_id;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-    OPEN c_cursor;
-    sumLoop: LOOP
-        -- fetch row from cursor
-        FETCH c_cursor INTO subTotal;
-        IF done THEN
-            LEAVE sumLoop;
-        END IF;
-        SET projectCount = projectCount + 1;
-        SET totalScores = totalScores + subTotal;
-    END LOOP;
-    CLOSE c_cursor;
+    DECLARE average FLOAT DEFAULT 0;
+    SELECT AVG(score) INTO average
+    FROM corrections
+    WHERE user_id = userId;
     -- set user's average score
     UPDATE users
-        SET average_score = totalScores/projectCount
+        SET average_score = average
         WHERE id = userId;
 END $$
 
