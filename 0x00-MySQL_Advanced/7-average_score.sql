@@ -34,7 +34,7 @@ BEGIN
     CLOSE c_cursor;
     -- set user's average score
     UPDATE users
-        SET average_score = ROUND(totalScores/projectCount)
+        SET average_score = totalScores/projectCount
         WHERE id = userId;
 END $$
 
