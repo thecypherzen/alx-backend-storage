@@ -48,7 +48,6 @@ The following can be used for referencing these areas, curated for optimized und
 | 1. | [0-uniq_users.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/0-uniq_users.sql) | A script that creates a table `users`. |
 | 2. | [1-country_users.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/1-country_users.sql) | A script that creates a table `users` with and added column that uses `ENUM`. Details in file. |
 | 3. | [2-fans.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/2-fans.sql) | A script that that ranks country origins of bands, ordered by the number of (non-unique) fans. Details in file. |
-
 | 4. | [3-glam_rock.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/3-glam_rock.sql) | A script that lists all bands with Glam rock as their main style, ranked by their longevity. Details in file. |
 | 5. | [4-store.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/4-store.sql) | A script that creates a trigger that decreases the quantity of an item after adding a new order. Details in file. |
 | 6. | [5-valid_email.sql](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x00-MySQL_Advanced/5-valid_email.sql) | A script that creates a trigger that resets the attribute valid_email only when the email has been changed. Details in file. |
