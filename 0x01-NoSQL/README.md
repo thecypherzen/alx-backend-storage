@@ -53,7 +53,7 @@ $ sudo service mongod status
 # mongod start/running, process 3627
 
 
-$ mongo --version
+$ mongos --version
 # Output
 # MongoDB shell version v4.2.8
 # git version: 43d25964249164d76d5e04dd6cf38f6111e21f5f
