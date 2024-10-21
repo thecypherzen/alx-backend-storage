@@ -13,7 +13,6 @@ def update_topics(mongo_collection, name, topics) -> None:
     Returns:
        None
     """
-    if type(name) is str and type(topics) is list:
-        mongo_collection.update_one(
-            {"name": name}, {"$set": {"topics": topics}}
-        )
+    mongo_collection.update_many(
+        {"name": name}, {"$set": {"topics": topics}}
+    )
