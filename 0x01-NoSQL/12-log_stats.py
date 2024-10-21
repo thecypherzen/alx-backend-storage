@@ -25,12 +25,12 @@
    47415 status check
 """
 
+if __name__ == "__main__":
+    from pymongo import MongoClient
 
-from pymongo import MongoClient
-
-client: MongoClient = MongoClient("mongodb://localhost:27017")
-nginx = client.logs.nginx
-res = f"""{nginx.count({})} logs
+    client: MongoClient = MongoClient("mongodb://localhost:27017")
+    nginx = client.logs.nginx
+    res = f"""{nginx.count({})} logs
 Methods:
 \tmethod GET: {nginx.count({'method': 'GET'})}
 \tmethod POST: {nginx.count({'method': 'POST'})}
@@ -39,4 +39,4 @@ Methods:
 \tmethod DELETE: {nginx.count({'method': 'DELETE'})}
 {nginx.count({'$and': [{'method': 'GET'},
 {'path': '/status'}]})} status check"""
-print(res)
+    print(res)
