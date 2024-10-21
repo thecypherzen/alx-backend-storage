@@ -6,7 +6,10 @@
   Display using this format:
    - first line: x logs where x is the number of documents in this collection
    - second line: Methods:
-   - 5 lines with the number of documents with the method = ["GET", "POST", "PUT", "PATCH", "DELETE"] in this order (see example below - warning: it’s a tabulation before each line)
+   - 5 lines with the number of documents with the
+     method = ["GET", "POST", "PUT", "PATCH", "DELETE"] in this
+     order (see example below - warning: it’s a tabulation
+     before each line)
    - one line with the number of documents with:
       - method=GET
       - path=/status
@@ -22,19 +25,18 @@
    47415 status check
 """
 
+if __name__ == "__main__":
+    from pymongo import MongoClient
 
-from pymongo import MongoClient
-
-client: MongoClient = MongoClient("mongodb://localhost:27017")
-nginx = client.logs.nginx
-res = f"""
-{nginx.count_documents({})} logs
+    client: MongoClient = MongoClient("mongodb://localhost:27017")
+    nginx = client.logs.nginx
+    res = f"""{nginx.count_documents({})} logs
 Methods:
 \tmethod GET: {nginx.count_documents({'method': 'GET'})}
 \tmethod POST: {nginx.count_documents({'method': 'POST'})}
 \tmethod PUT: {nginx.count_documents({'method': 'PUT'})}
 \tmethod PATCH: {nginx.count_documents({'method': 'PATCH'})}
 \tmethod DELETE: {nginx.count_documents({'method': 'DELETE'})}
-{nginx.count_documents({'$and': [{'method': 'GET'}, {'path': '/status'}]})} status check
-"""
-print(res)
+{nginx.count_documents({'$and': [{'method': 'GET'},
+{'path': '/status'}]})} status check"""
+    print(res)
