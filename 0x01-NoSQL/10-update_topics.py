@@ -14,6 +14,6 @@ def update_topics(mongo_collection, name, topics) -> None:
        None
     """
     if type(name) is str and type(topics) is list:
-        mongo_collection.update(
+        mongo_collection.update_one(
             {"name": name}, {"$set": {"topics": topics}}
         )
