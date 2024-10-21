@@ -8,30 +8,18 @@ DELIMITER $$
 
 CREATE PROCEDURE ComputeAverageWeightedScoreForUser()
 BEGIN
-    DECLARE currentUserId INT;
-    DECLARE done INT DEFAULT FALSE;
-    DECLARE userIdCursor CURSOR FOR
-        SELECT id FROM users;
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-    OPEN userIdCursor;
-    calUserAvg: LOOP
-        FETCH userIdCursor INTO currentUserId;
-        IF done THEN
-           LEAVE calUserAvg;
-        END IF;
-        SELECT SUM(weight * score), SUM(weight)
-        INTO @weighted_scores, @total_weights
-        FROM (
-            SELECT corrections.score, projects.weight
-            FROM projects JOIN corrections
-            ON project_id = projects.id
-            WHERE user_id = currentUserId
-        ) AS user_weighted_scores;
+    UPDATE users,
+        (SELECT user_id,
+            SUM(weight) AS 'wsum',
+            SUM(score * weight) AS 'wscores'
+        FROM projects
+             JOIN corrections
+             ON project_id = projects.id
+        GROUP BY user_id
+        ) as weighted_table
 
-    UPDATE users
-    SET average_score = @weighted_scores / @total_weights
-    WHERE id = currentUserId;
-    END LOOP;
+    SET average_score = wscores / wsum
+        WHERE users.id = weighted_table.user_id;
 END $$
 
 DELIMITER ;
