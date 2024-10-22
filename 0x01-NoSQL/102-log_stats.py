@@ -35,7 +35,8 @@ if __name__ == "__main__":
     # calculate and log out methods data
     print(f"{nginx.count_documents({})} logs\nMethods:")
     for method in methods:
-        print(f"\t{method}: {nginx.count_documents({'method': method})}")
+        print(f"""\tmethod {method}: \
+{nginx.count_documents({'method': method})}""")
 
     # log out status data
     print(f"""{nginx.count_documents({
