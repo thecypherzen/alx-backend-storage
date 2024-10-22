@@ -88,8 +88,7 @@ $ sudo mkdir -p /data/db
 | 2. | [1-use_or_create_database](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x01-NoSQL/0-list_databases) | A script that creates or uses the database `my_db` |
 | 3. | [2-insert](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/2-insert) | A script that inserts a document in the collection `school`. The db name is passed as an option to `mongo`/`mongosh` | 
 | 4. | [3-all](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/3-all) | A script that lists all documents in the collection `school`. The db name is passed as an option to `mongo`/`mongosh`. | 
-| 5. | [4-match](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/4-match) | A script that lists all documents with `name="Holberton school"` in the collection `school`. The db     
-      name is passed as an option to `mongo`/`mongosh`. | 
+| 5. | [4-match](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/4-match) | A script that lists all documents with `name="Holberton school"` in the collection `school`. The db name is passed as an option to `mongo`/`mongosh`. | 
 | 6. | [5-count](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/5-count) | A script that displays the number of documents in the collection `school`. The db name is passed as an option to `mongo`/`mongosh`.| 
 | 7. | [6-update](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/6-update) | A script that adds a new attribute to a document in the collection `school`. Requirements in file. | 
 | 8. | [7-delete](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/7-delete) | A script that deletes all documents with `name="Holberton school"` in collection `school`. The db name is passed as an option to `mongo`/`mongosh`. | 
