@@ -14,6 +14,8 @@
       - method=GET
       - path=/status
    - test data in file `dump`
+   - IP data -> see example
+
    Example:
    94778 logs
    Methods:
@@ -23,6 +25,11 @@
         method PATCH: 0
         method DELETE: 0
    47415 status check
+   IPs:
+       172.31.63.67: 15805
+       172.31.2.14: 15805
+       172.31.29.194: 15805
+       ...
 """
 
 if __name__ == "__main__":
