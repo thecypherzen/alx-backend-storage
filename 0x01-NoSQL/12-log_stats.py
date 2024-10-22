@@ -30,13 +30,15 @@ if __name__ == "__main__":
 
     client: MongoClient = MongoClient("mongodb://localhost:27017")
     nginx = client.logs.nginx
-    res = f"""{nginx.count({})} logs
-Methods:
-\tmethod GET: {nginx.count({'method': 'GET'})}
-\tmethod POST: {nginx.count({'method': 'POST'})}
-\tmethod PUT: {nginx.count({'method': 'PUT'})}
-\tmethod PATCH: {nginx.count({'method': 'PATCH'})}
-\tmethod DELETE: {nginx.count({'method': 'DELETE'})}
-{nginx.count({'$and': [{'method': 'GET'},
-{'path': '/status'}]})} status check"""
-    print(res)
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+
+    # calculate and log out methods data
+    print(f"{nginx.count_documents({})} logs\nMethods:")
+    for method in methods:
+        print(f"""\tmethod {method}: \
+{nginx.count_documents({'method': method})}""")
+
+    # log out status data
+    print(f"""{nginx.count_documents({
+    '$and': [{'method': 'GET'},
+    {'path': '/status'}]})} status check""")
