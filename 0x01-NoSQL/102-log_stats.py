@@ -26,28 +26,30 @@
 """
 
 if __name__ == "__main__":
-    from collections import Counter
     from pymongo import MongoClient
 
     client: MongoClient = MongoClient("mongodb://localhost:27017")
     nginx = client.logs.nginx
-    result = ""
-    # get ips from db and group by count
-    ip_docs = nginx.find({}, {"ip": 1})
-    ip_counter = Counter(list(doc['ip'] for doc in ip_docs))
-    top_ten = ip_counter.most_common(10)
-    for top_ip in top_ten:
-        result += f"\t{top_ip[0]}: {top_ip[1]}\n"
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
-    res = f"""{nginx.count({})} logs
-Methods:
-\tmethod GET: {nginx.count({'method': 'GET'})}
-\tmethod POST: {nginx.count({'method': 'POST'})}
-\tmethod PUT: {nginx.count({'method': 'PUT'})}
-\tmethod PATCH: {nginx.count({'method': 'PATCH'})}
-\tmethod DELETE: {nginx.count({'method': 'DELETE'})}
-{nginx.count({'$and': [{'method': 'GET'},
-{'path': '/status'}]})} status check
-IPS:
-{result}"""
-    print(res, end="")
+    # calculate and log out methods data
+    print(f"{nginx.count_documents({})} logs\nMethods:")
+    for method in methods:
+        print(f"\t{method}: {nginx.count_documents({'method': method})}")
+
+    # log out status data
+    print(f"""{nginx.count_documents({
+    '$and': [{'method': 'GET'},
+    {'path': '/status'}]})} status check""")
+
+    # aggregate ip count data
+    ip_counts = nginx.aggregate([
+        {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}},
+        {"$limit": 10}
+    ])
+
+    # log out ips data
+    print("IPs:")
+    for ip_count in ip_counts:
+        print(f"\t{ip_count['_id']}: {ip_count['count']}")
