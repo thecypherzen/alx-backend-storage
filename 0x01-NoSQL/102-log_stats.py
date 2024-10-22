@@ -26,20 +26,19 @@
 """
 
 if __name__ == "__main__":
+    from collections import Counter
     from pymongo import MongoClient
 
     client: MongoClient = MongoClient("mongodb://localhost:27017")
     nginx = client.logs.nginx
     result = ""
-    # get aggregated data from db
-    ips_cursor = nginx.aggregate([
-        {"$group": {"_id": "$ip", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}},
-        {"$limit": 10}
-    ])
-    # construct ips list string and result
-    for ip_data in ips_cursor:
-        result += f"\t{ip_data['_id']}: {ip_data['count']}\n"
+    # get ips from db and group by count
+    ip_docs = nginx.find({}, {"ip": 1})
+    ip_counter = Counter(list(doc['ip'] for doc in ip_docs))
+    top_ten = ip_counter.most_common(10)
+    for top_ip in top_ten:
+        result += f"\t{top_ip[0]}: {top_ip[1]}\n"
+
     res = f"""{nginx.count({})} logs
 Methods:
 \tmethod GET: {nginx.count({'method': 'GET'})}
