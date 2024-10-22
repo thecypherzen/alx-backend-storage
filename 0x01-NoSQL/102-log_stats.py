@@ -33,12 +33,12 @@ if __name__ == "__main__":
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
     # calculate and log out methods data
-    print(f"{nginx.count_documents({})} logs\nMethods:")
+    print(f"{nginx.count({})} logs\nMethods:")
     for method in methods:
-        print(f"\t{method}: {nginx.count_documents({'method': method})}")
+        print(f"\t{method}: {nginx.count({'method': method})}")
 
     # log out status data
-    print(f"""{nginx.count_documents({
+    print(f"""{nginx.count({
     '$and': [{'method': 'GET'},
     {'path': '/status'}]})} status check""")
 
