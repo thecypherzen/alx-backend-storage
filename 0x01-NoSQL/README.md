@@ -35,7 +35,7 @@ The following can be used for referencing these areas, curated for optimized und
 - **Released:** Mon Oct. 21 - 6am.
   - **1st Deadline** Wed Oct. 23 2024 - 6am.
   - **Duration:** 48hrs
-  - **Completed:** pending.
+  - **Completed:** Tue Oct. 22 2024 - 11:05am.
 
 
 ## Development Environment ##
@@ -85,4 +85,19 @@ $ sudo mkdir -p /data/db
 | **SN** | File                         | Description                                         |
 |----|------------------------------|-----------------------------------------------------|
 | 1. | [0-list_databases](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x01-NoSQL/0-list_databases) | A script that lists all databases in MongoDB. |
- 
+| 2. | [1-use_or_create_database](https://github.com/thecypherzen/alx-backend-storage/blob/main/0x01-NoSQL/0-list_databases) | A script that creates or uses the database `my_db` |
+| 3. | [2-insert](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/2-insert) | A script that inserts a document in the collection `school`. The db name is passed as an option to `mongo`/`mongosh` | 
+| 4. | [3-all](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/3-all) | A script that lists all documents in the collection `school`. The db name is passed as an option to `mongo`/`mongosh`. | 
+| 5. | [4-match](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/4-match) | A script that lists all documents with `name="Holberton school"` in the collection `school`. The db     
+      name is passed as an option to `mongo`/`mongosh`. | 
+| 6. | [5-count](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/5-count) | A script that displays the number of documents in the collection `school`. The db name is passed as an option to `mongo`/`mongosh`.| 
+| 7. | [6-update](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/6-update) | A script that adds a new attribute to a document in the collection `school`. Requirements in file. | 
+| 8. | [7-delete](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/7-delete) | A script that deletes all documents with `name="Holberton school"` in collection `school`. The db name is passed as an option to `mongo`/`mongosh`. | 
+| 9. | [8-all.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/8-all.py) | A  Python function that lists all documents in a collection. <ul><li><i>Prototype:</i> `def list_all(mongo_collection)`</li></ul>| 
+| 10. | [9-insert_school.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/9-insert_school.py) | A Python function that inserts a new document in a collection based on `kwargs`.<ul><li><i>Prototype:</i> `def insert_school(mongo_collection, **kwargs)`</li></ul> | 
+| 11. | [10-update_topics.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/10-update_topics.py) | A Python function that changes all topics of a school document based on the name. <ul><li><i>Prototype:</i> `def update_topics(mongo_collection, name, topics)`</li></ul>| 
+| 12. | [11-schools_by_topic.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/11-schools_by_topic.py) | A Python function that returns the list of school having a specific topic. <ul><li><i>Prototype:</i> `def schools_by_topic(mongo_collection, topic)`</li></ul>| 
+| 13. | [12-log_stats.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/12-log_stats.py) | A Python script that provides some stats about Nginx logs stored in MongoDB. Dummy data [here](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/dump).| 
+| 14. | [100-find](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/100-find) | A script that lists all documents with `name` starting with `Holberton` in the collection `school`. | 
+| 15. | [101-students.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/101-students.py) | A Python function that returns all students sorted by average score. <ul><li><i>Prototype</i>`def top_students(mongo_collection)`</li></ul>|
+| 16. | [102-log_stats.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/102-log_stats.py) | A modification of [12-log_stats.py](https://github.com/thecypherzen/alx-backend-storage/tree/main/0x01-NoSQL/12-log_stats.py), adding the top 10 of the most present IPs in the collection `nginx` of the database  `logs`. |
