@@ -13,7 +13,7 @@ The following can be used for referencing these areas, curated for optimized und
 - [Redis Crash Course Tutorial](https://www.youtube.com/watch?v=Hbt56gFj998)
 - [Redis commands](https://redis.io/docs/latest/commands/)
 - [Redis python client](https://redis-py.readthedocs.io/en/stable/)
-- [How to Use Redis With Python](https://realpython.com/introduction-to-mongodb-and-python/#using-mongodb-with-python-and-pymongo)
+- [How to Use Redis With Python](https://realpython.com/python-redis/)
 
 
 ## Folder Details ###
