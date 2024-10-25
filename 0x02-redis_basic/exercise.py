@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Creates the class `Cache`"""
-from redis import Redis
+import redis
 from typing import Any, Callable, Optional, Union
 from uuid import uuid4
 
@@ -14,7 +14,7 @@ class Cache:
     """
     def __init__(self):
         """Initializes instance of `Cache`"""
-        self._redis = Redis()
+        self._redis = resdis.Redis()
         self._redis.flushdb()
 
     def get(self, key: str,
