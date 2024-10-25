@@ -14,8 +14,8 @@ class Cache:
     """
     def __init__(self):
         """Initializes instance of `Cache`"""
-        self.__redis = Redis()
-        self.__redis.flushdb()
+        self._redis = Redis()
+        self._redis.flushdb()
 
     def get(self, key: str,
             fn: Optional[Callable[
@@ -27,7 +27,7 @@ class Cache:
            key(str): key of the item in db
            fn(obj:callable): functino to use for conversion
         """
-        if not key or not (data := self.__redis.get(key)):
+        if not key or not (data := self._redis.get(key)):
             None
         if not fn:
             return data
@@ -51,12 +51,10 @@ class Cache:
             return None
         return self.get(key, lambda val: val.decode("utf-8"))
 
-    def store(self, data: Union[str, bytes, int, float]) -> str | None:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """Generates a random key and stores the input data
         in Redis using the random key and returns the key.
         """
-        if data:
-            key: str = str(uuid4())
-            self.__redis.set(key, data)
-            return key
-        return None
+        key: str = str(uuid4())
+        self._redis.set(key, data)
+        return key
