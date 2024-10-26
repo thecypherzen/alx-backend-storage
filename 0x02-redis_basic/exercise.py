@@ -1,8 +1,19 @@
 #!/usr/bin/env python3
 """Creates the class `Cache`"""
 import redis
+from functools import wraps
 from typing import Any, Callable, Optional, Union
 from uuid import uuid4
+
+
+def count_calls(method: "Callable[[Cache, Union[str, bytes, int,\
+float]], str]") -> "Callable[[Cache, Union[str, bytes, \
+int, float]], str]":
+    @wraps(method)
+    def wrapper(*args):
+        args[0]._redis.incr(method.__qualname__)
+        return method(*args)
+    return wrapper
 
 
 class Cache:
@@ -51,6 +62,7 @@ class Cache:
             return None
         return self.get(key, fn=lambda val: val.decode("utf-8"))
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Generates a random key and stores the input data
         in Redis using the random key and returns the key.
