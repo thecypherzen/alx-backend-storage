@@ -9,6 +9,7 @@ from uuid import uuid4
 def count_calls(method: "Callable[[Cache, Union[str, bytes, int,\
 float]], str]") -> "Callable[[Cache, Union[str, bytes, \
 int, float]], str]":
+    """Counts every new call to store method"""
     @wraps(method)
     def wrapper(*args):
         args[0]._redis.incr(method.__qualname__)
