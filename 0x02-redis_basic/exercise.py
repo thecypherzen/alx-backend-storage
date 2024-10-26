@@ -28,8 +28,7 @@ def call_history(method: Callable) -> Callable:
         in_list = f"{method.__qualname__}:inputs"
         out_list = f"{method.__qualname__}:outputs"
 
-        for arg in args:
-            self._redis.rpush(in_list, str(arg))
+        self._redis.rpush(in_list, str(args))
         res = method(self, *args, **kwargs)
         self._redis.rpush(out_list, res)
         return res
