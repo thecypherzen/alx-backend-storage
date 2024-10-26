@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Creates the class `Cache`"""
 import redis
-from functools import wraps
+import functools
 from typing import Any, Callable, Optional, Union
 from uuid import uuid4
 
@@ -10,10 +10,10 @@ def count_calls(method: "Callable[[Cache, Union[str, bytes, int,\
 float]], str]") -> "Callable[[Cache, Union[str, bytes, \
 int, float]], str]":
     """Counts every new call to store method"""
-    @wraps(method)
-    def wrapper(*args):
-        args[0]._redis.incr(method.__qualname__)
-        return method(*args)
+    @functools.wraps(method)
+    def wrapper(self, data):
+        self._redis.incr(method.__qualname__)
+        return method(self, data)
     return wrapper
 
 
