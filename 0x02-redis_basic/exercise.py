@@ -104,7 +104,7 @@ def replay(method):
     outputs = db.lrange(out_list, 0, -1)
     results = zip(inputs, outputs)
 
-    print(f"{method.__qualname__} was called {len(inputs)} times")
+    print(f"{method.__qualname__} was called {len(inputs)} times:")
     for item in results:
-        print(f"{method.__qualname__}(*{str(item[0], 'utf-8')}) -> ",
+        print(f"{method.__qualname__}(*{str(item[0], 'utf-8')}) ->",
               f"{str(item[1], 'utf-8')}")
