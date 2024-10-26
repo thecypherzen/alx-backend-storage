@@ -1,26 +1,25 @@
 #!/usr/bin/env python3
+"""Defines a function to track requests to various urls"""
+from typing import Callable
 import functools
 import requests
 import redis
 
 
 cache = redis.Redis()
-cache.flushdb()
 
 
-def track_count(func):
+def track_count(func: Callable) -> Callable:
     """tracks how often a url is visited"""
     @functools.wraps(func)
-    def wrapper(url):
-        key = f"count:{url}"
-        cache.incr(key)
-        res = cache.get(func.__qualname__)
+    def wrapper(url: str) -> str:
+        cache.incr(f"count:{url}")
+        res = cache.get(f"{func.__qualname__}")
         if res:
             return str(res, "utf-8")
         res = func(url)
-        res_text = res.text
-        cache.setex(f"{func.__qualname__}", 10, res_text)
-        return res_text
+        cache.setex(f"{func.__qualname__}", 10, res)
+        return res
     return wrapper
 
 

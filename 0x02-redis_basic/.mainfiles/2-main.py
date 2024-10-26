@@ -4,7 +4,9 @@
 Cache = __import__('exercise').Cache
 
 cache = Cache()
+count_calls = __import__('exercise').count_calls
 
+print(count_calls)
 cache.store(b"first")
 print(cache.get(cache.store.__qualname__))
 
