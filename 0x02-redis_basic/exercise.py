@@ -90,3 +90,21 @@ class Cache:
         key: str = str(uuid4())
         self._redis.set(key, data)
         return key
+
+
+def replay(method):
+    """Displays the history of calls of a particular function
+    using keys from <call_history>
+    """
+    in_list = f"{method.__qualname__}:inputs"
+    out_list = f"{method.__qualname__}:outputs"
+
+    db = getattr(method.__self__, "_redis")
+    inputs = db.lrange(in_list, 0, -1)
+    outputs = db.lrange(out_list, 0, -1)
+    results = zip(inputs, outputs)
+
+    print(f"{method.__qualname__} was called {len(inputs)} times")
+    for item in results:
+        print(f"{method.__qualname__}(*{str(item[0], 'utf-8')}) -> ",
+              f"{str(item[1], 'utf-8')}")
