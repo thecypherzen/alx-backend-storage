@@ -14,11 +14,13 @@ def track_count(func: Callable) -> Callable:
     @functools.wraps(func)
     def wrapper(url: str) -> str:
         cache.incr(f"count:{url}")
-        res = cache.get(f"{func.__qualname__}")
+        count = cache.get(f"count:{url}")
+        res = cache.get(f"{url}")
         if res:
-            return str(res, "utf-8")
+            res = str(res, "utf-8")
+            return res
         res = func(url)
-        cache.setex(f"{func.__qualname__}", 10, res)
+        cache.setex(f"{url}", 10, res)
         return res
     return wrapper
 
